@@ -74,54 +74,65 @@ function App() {
 	});
 
 	return (
-		<div className="chat container">
-			{messages.map((message) => (
-				<div key={message.id} className="row message">
-					<div className="two columns user">{message.user}</div>
-					<div className="seven columns">{message.content}</div>
-					<div className="three columns timestamp">
-						{new Date(message.timestamp).toLocaleString()}
-					</div>
+		<div className="chat-app">
+			<div className="messages-container">
+				<div className="messages-list">
+					{messages.map((message) => (
+						<div key={message.id} className="message">
+							<div className="message-header">
+								<span className="message-user">{message.user}</span>
+								<span className="message-time">
+									{new Date(message.timestamp).toLocaleString()}
+								</span>
+							</div>
+							<div className="message-content">{message.content}</div>
+						</div>
+					))}
 				</div>
-			))}
-			<form
-				className="message-form"
-				onSubmit={(e) => {
-					e.preventDefault();
-					const content = e.currentTarget.elements.namedItem(
-						"content",
-					) as HTMLInputElement;
-					const chatMessage: ChatMessage = {
-						id: nanoid(8),
-						content: content.value,
-						user: name,
-						role: "user",
-						timestamp: Date.now(),
-					};
-					setMessages((messages) => [...messages, chatMessage]);
-					// we could broadcast the message here
+			</div>
+			
+			<div className="message-form-container">
+				<form
+					className="message-form"
+					onSubmit={(e) => {
+						e.preventDefault();
+						const content = e.currentTarget.elements.namedItem(
+							"content",
+						) as HTMLInputElement;
+						const chatMessage: ChatMessage = {
+							id: nanoid(8),
+							content: content.value,
+							user: name,
+							role: "user",
+							timestamp: Date.now(),
+						};
+						setMessages((messages) => [...messages, chatMessage]);
+						// we could broadcast the message here
 
-					socket.send(
-						JSON.stringify({
-							type: "add",
-							...chatMessage,
-						} satisfies Message),
-					);
+						socket.send(
+							JSON.stringify({
+								type: "add",
+								...chatMessage,
+							} satisfies Message),
+						);
 
-					content.value = "";
-				}}
-			>
-				<input
-					type="text"
-					name="content"
-					className="message-input"
-					placeholder={`Hello ${name}! Type a message...`}
-					autoComplete="off"
-				/>
-				<button type="submit" className="send-message">
-					Send
-				</button>
-			</form>
+						content.value = "";
+					}}
+				>
+					<input
+						type="text"
+						name="content"
+						className="message-input"
+						placeholder={`Hello ${name}! Type a message...`}
+						autoComplete="off"
+					/>
+					<button type="submit" className="send-button">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+							<path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13"/>
+						</svg>
+					</button>
+				</form>
+			</div>
 		</div>
 	);
 }
