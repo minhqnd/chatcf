@@ -58,12 +58,12 @@ function App() {
 					messages.map((m) =>
 						m.id === message.id
 							? {
-									id: message.id,
-									content: message.content,
-									user: message.user,
-									role: message.role,
-									timestamp: message.timestamp,
-								}
+								id: message.id,
+								content: message.content,
+								user: message.user,
+								role: message.role,
+								timestamp: message.timestamp,
+							}
 							: m,
 					),
 				);
@@ -90,7 +90,7 @@ function App() {
 					))}
 				</div>
 			</div>
-			
+
 			<div className="message-form-container">
 				<form
 					className="message-form"
@@ -127,11 +127,10 @@ function App() {
 						autoComplete="off"
 					/>
 					<button type="submit" className="send-button">
-						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-							<path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13"/>
-						</svg>
+						Send
 					</button>
 				</form>
+				<div className="credit">@minhqnd</div>
 			</div>
 		</div>
 	);
