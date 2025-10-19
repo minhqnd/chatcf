@@ -38,46 +38,65 @@ html {
 	color: var(--text-color);
 }
 
-.chat {
-	padding-top: 40px;
+/* Main chat app layout */
+.chat-app {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
 }
 
-#root {
+/* Messages container - takes remaining space and scrolls */
+.messages-container {
 	flex: 1;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-end;
+	min-height: 0; /* Allow flex item to shrink */
+}
+
+.messages-list {
+	flex: 1;
 	overflow-y: auto;
-	height: 100%;
-	/* padding: 10px; */
+	padding: 20px;
+	padding-bottom: 10px;
 }
 
+/* Individual message styling */
 .message {
-	margin-bottom: 10px;
+	display: flex;
+	padding: 8px 0;
+	border-bottom: 1px solid var(--border-color);
 }
 
-.message .user {
+.message-user {
 	font-weight: bold;
+	min-width: 80px;
+	padding-right: 15px;
 	text-align: right;
+	flex-shrink: 0;
 }
 
-.message .remove {
-	position: absolute;
-	width: 22px;
-	height: 20px;
-	left: -60px;
-	/* display: "block", */
-	display: none;
-	padding: 0;
-	line-height: 18px;
-	border: "none";
+.message-content {
+	flex: 1;
+	padding: 0 15px;
+	word-wrap: break-word;
 }
 
-.message .timestamp {
+.message-timestamp {
 	font-size: 0.8em;
 	color: var(--text-secondary);
 	text-align: right;
-	white-space: nowrap; /* Prevent wrapping */
+	min-width: 120px;
+	padding-left: 15px;
+	white-space: nowrap;
+	flex-shrink: 0;
+}
+
+/* Input container - fixed at bottom */
+.input-container {
+	flex-shrink: 0;
+	border-top: 1px solid var(--border-color);
+	background-color: var(--container-bg);
+	padding: 15px 20px;
 }
 
 .send-message {
@@ -99,20 +118,10 @@ html {
 	background-color: var(--button-hover);
 }
 
-.my-input-text {
-	height: 38px;
-	box-sizing: border-box;
-}
-
-.my-input-text::placeholder {
-	color: var(--text-secondary);
-}
-
 /* Message form styling */
 .message-form {
 	display: flex;
 	gap: 10px;
-	margin-top: 10px;
 }
 
 .message-input {
