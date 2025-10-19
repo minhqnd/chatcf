@@ -85,7 +85,7 @@ function App() {
 				</div>
 			))}
 			<form
-				className="row"
+				className="message-form"
 				onSubmit={(e) => {
 					e.preventDefault();
 					const content = e.currentTarget.elements.namedItem(
@@ -114,11 +114,11 @@ function App() {
 				<input
 					type="text"
 					name="content"
-					className="seven columns my-input-text"
+					className="message-input"
 					placeholder={`Hello ${name}! Type a message...`}
 					autoComplete="off"
 				/>
-				<button type="submit" className="send-message three columns">
+				<button type="submit" className="send-message">
 					Send
 				</button>
 			</form>
