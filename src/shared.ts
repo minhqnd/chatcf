@@ -28,8 +28,7 @@ export type Message =
 		messages: ChatMessage[];
 	};
 
-// export names as an array of 26 randomized user names in the format "user000"
-export const names = Array.from({ length: 26 }, () => {
-	const n = Math.floor(Math.random() * 1000);
-	return `user${n.toString().padStart(3, "0")}`;
+// export names as an array of 26 fixed user names in the format "user000"
+export const names = Array.from({ length: 26 }, (_, i) => {
+	return `user${i.toString().padStart(3, "0")}`;
 });

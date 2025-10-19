@@ -221,6 +221,7 @@ html {
 	.send-button {
 		width: 40px;
 		height: 40px;
+		font-size: 11px;
 	}
 	
 	.scroll-to-bottom-btn {
@@ -228,6 +229,7 @@ html {
 		right: 16px;
 		width: 40px;
 		height: 40px;
+		border-radius: 50%; /* Ensure it stays circular on mobile */
 	}
 }
 
@@ -272,6 +274,9 @@ html {
 	z-index: 50;
 	font-size: 18px;
 	font-weight: bold;
+	box-sizing: border-box; /* Ensure consistent sizing */
+	min-width: 44px; /* Prevent shrinking */
+	min-height: 44px; /* Prevent shrinking */
 }
 
 @media (prefers-color-scheme: dark) {
