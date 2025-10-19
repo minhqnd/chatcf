@@ -102,7 +102,7 @@ html {
 
 /* Form container - fixed at bottom */
 .message-form-container {
-	padding-bottom: 5px;
+	padding-bottom: 5px !important;
 	position: fixed;
 	bottom: 0;
 	left: 0;
@@ -222,6 +222,13 @@ html {
 		width: 40px;
 		height: 40px;
 	}
+	
+	.scroll-to-bottom-btn {
+		bottom: 110px; /* Adjust for mobile form height */
+		right: 16px;
+		width: 40px;
+		height: 40px;
+	}
 }
 
 /* Hide scrollbar but keep functionality */
@@ -243,6 +250,57 @@ html {
 		background: rgba(255, 255, 255, 0.2);
 	}
 }
+
+/* Scroll to bottom button */
+.scroll-to-bottom-btn {
+	position: fixed;
+	bottom: 120px; /* Above the message form */
+	right: 20px;
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.9);
+	backdrop-filter: blur(10px);
+	border: 2px solid rgba(0, 0, 0, 0.1);
+	color: #333333;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	transition: all 0.2s ease;
+	z-index: 50;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+@media (prefers-color-scheme: dark) {
+	.scroll-to-bottom-btn {
+		background: rgba(30, 30, 30, 0.9);
+		border-color: rgba(255, 255, 255, 0.2);
+		color: #e0e0e0;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+	}
+}
+
+.scroll-to-bottom-btn:hover {
+	transform: scale(1.1);
+	background: rgba(255, 255, 255, 1);
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+	.scroll-to-bottom-btn:hover {
+		background: rgba(45, 45, 45, 1);
+		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+	}
+}
+
+.scroll-to-bottom-btn:active {
+	transform: scale(0.95);
+}
+
+/* Remove SVG specific styles since we're using Unicode now */
 
 .credit {
 	display: flex;

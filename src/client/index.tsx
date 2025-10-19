@@ -13,10 +13,24 @@ import { nanoid } from "nanoid";
 import { names, type ChatMessage, type Message } from "../shared";
 
 function App() {
-	const [name] = useState(names[Math.floor(Math.random() * names.length)]);
+	// Get or create username from localStorage
+	const getStoredUsername = () => {
+		const stored = localStorage.getItem('chat-username');
+		if (stored && names.includes(stored)) {
+			return stored;
+		}
+		// Generate new username and store it
+		const newUsername = names[Math.floor(Math.random() * names.length)];
+		localStorage.setItem('chat-username', newUsername);
+		return newUsername;
+	};
+
+	const [name] = useState(getStoredUsername());
 	const [messages, setMessages] = useState<ChatMessage[]>([]);
 	const { room } = useParams();
 	const messagesEndRef = useRef<HTMLDivElement>(null);
+	const messagesContainerRef = useRef<HTMLDivElement>(null);
+	const [showScrollButton, setShowScrollButton] = useState(false);
 
 	const scrollToBottom = () => {
 		messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -25,6 +39,23 @@ function App() {
 	useEffect(() => {
 		scrollToBottom();
 	}, [messages]);
+
+	// Handle scroll to show/hide scroll button
+	useEffect(() => {
+		const container = messagesContainerRef.current;
+		if (!container) return;
+
+		const handleScroll = () => {
+			const { scrollTop, scrollHeight, clientHeight } = container;
+			const isNearBottom = scrollTop + clientHeight >= scrollHeight - 100; // 100px threshold
+			setShowScrollButton(!isNearBottom);
+		};
+
+		container.addEventListener('scroll', handleScroll);
+		handleScroll(); // Check initial state
+
+		return () => container.removeEventListener('scroll', handleScroll);
+	}, []);
 
 	// Generate consistent color for username
 	const getUserColor = (username: string) => {
@@ -121,7 +152,7 @@ function App() {
 
 	return (
 		<div className="chat-app">
-			<div className="messages-container">
+			<div className="messages-container" ref={messagesContainerRef}>
 				<div className="messages-list">
 					{messages.map((message) => (
 						<div key={message.id} className="message">
@@ -142,6 +173,16 @@ function App() {
 					<div ref={messagesEndRef} />
 				</div>
 			</div>
+
+			{showScrollButton && (
+				<button 
+					className="scroll-to-bottom-btn"
+					onClick={scrollToBottom}
+					aria-label="Scroll to bottom"
+				>
+					⇓
+				</button>
+			)}
 
 			<div className="message-form-container">
 				<form
