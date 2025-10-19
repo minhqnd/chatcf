@@ -74,60 +74,54 @@ function App() {
 	});
 
 	return (
-		<div className="chat-app">
-			<div className="messages-container">
-				<div className="messages-list">
-					{messages.map((message) => (
-						<div key={message.id} className="message">
-							<div className="message-user">{message.user}</div>
-							<div className="message-content">{message.content}</div>
-							<div className="message-timestamp">
-								{new Date(message.timestamp).toLocaleString()}
-							</div>
-						</div>
-					))}
+		<div className="chat container">
+			{messages.map((message) => (
+				<div key={message.id} className="row message">
+					<div className="two columns user">{message.user}</div>
+					<div className="seven columns">{message.content}</div>
+					<div className="three columns timestamp">
+						{new Date(message.timestamp).toLocaleString()}
+					</div>
 				</div>
-			</div>
-			<div className="input-container">
-				<form
-					className="message-form"
-					onSubmit={(e) => {
-						e.preventDefault();
-						const content = e.currentTarget.elements.namedItem(
-							"content",
-						) as HTMLInputElement;
-						const chatMessage: ChatMessage = {
-							id: nanoid(8),
-							content: content.value,
-							user: name,
-							role: "user",
-							timestamp: Date.now(),
-						};
-						setMessages((messages) => [...messages, chatMessage]);
-						// we could broadcast the message here
+			))}
+			<form
+				className="message-form"
+				onSubmit={(e) => {
+					e.preventDefault();
+					const content = e.currentTarget.elements.namedItem(
+						"content",
+					) as HTMLInputElement;
+					const chatMessage: ChatMessage = {
+						id: nanoid(8),
+						content: content.value,
+						user: name,
+						role: "user",
+						timestamp: Date.now(),
+					};
+					setMessages((messages) => [...messages, chatMessage]);
+					// we could broadcast the message here
 
-						socket.send(
-							JSON.stringify({
-								type: "add",
-								...chatMessage,
-							} satisfies Message),
-						);
+					socket.send(
+						JSON.stringify({
+							type: "add",
+							...chatMessage,
+						} satisfies Message),
+					);
 
-						content.value = "";
-					}}
-				>
-					<input
-						type="text"
-						name="content"
-						className="message-input"
-						placeholder={`Hello ${name}! Type a message...`}
-						autoComplete="off"
-					/>
-					<button type="submit" className="send-message">
-						Send
-					</button>
-				</form>
-			</div>
+					content.value = "";
+				}}
+			>
+				<input
+					type="text"
+					name="content"
+					className="message-input"
+					placeholder={`Hello ${name}! Type a message...`}
+					autoComplete="off"
+				/>
+				<button type="submit" className="send-message">
+					Send
+				</button>
+			</form>
 		</div>
 	);
 }
