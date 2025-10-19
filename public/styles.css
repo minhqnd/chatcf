@@ -46,6 +46,19 @@ html {
 	font-size: 0.8em;
 	color: #666;
 	text-align: right;
+	white-space: nowrap; /* Prevent wrapping */
+}
+
+.send-message {
+	padding: 0;
+	height: 38px; /* Match input height */
+	line-height: 38px; /* Center text vertically */
+	box-sizing: border-box;
+}
+
+.my-input-text {
+	height: 38px;
+	box-sizing: border-box;
 }
 
 .my-input-text::placeholder {

@@ -78,8 +78,8 @@ function App() {
 			{messages.map((message) => (
 				<div key={message.id} className="row message">
 					<div className="two columns user">{message.user}</div>
-					<div className="eight columns">{message.content}</div>
-					<div className="two columns timestamp">
+					<div className="seven columns">{message.content}</div>
+					<div className="three columns timestamp">
 						{new Date(message.timestamp).toLocaleString()}
 					</div>
 				</div>
@@ -114,11 +114,11 @@ function App() {
 				<input
 					type="text"
 					name="content"
-					className="eight columns my-input-text"
+					className="seven columns my-input-text"
 					placeholder={`Hello ${name}! Type a message...`}
 					autoComplete="off"
 				/>
-				<button type="submit" className="send-message two columns">
+				<button type="submit" className="send-message three columns">
 					Send
 				</button>
 			</form>
