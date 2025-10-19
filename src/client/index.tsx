@@ -74,16 +74,18 @@ function App() {
 	});
 
 	return (
-		<div className="chat container">
-			{messages.map((message) => (
-				<div key={message.id} className="row message">
-					<div className="two columns user">{message.user}</div>
-					<div className="seven columns">{message.content}</div>
-					<div className="three columns timestamp">
-						{new Date(message.timestamp).toLocaleString()}
+		<div className="chat">
+			<div className="messages-container">
+				{messages.map((message) => (
+					<div key={message.id} className="message">
+						<div className="user">{message.user}</div>
+						<div className="content">{message.content}</div>
+						<div className="timestamp">
+							{new Date(message.timestamp).toLocaleString()}
+						</div>
 					</div>
-				</div>
-			))}
+				))}
+			</div>
 			<form
 				className="message-form"
 				onSubmit={(e) => {
