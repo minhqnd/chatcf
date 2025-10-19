@@ -79,13 +79,7 @@ html {
 .message-user {
 	font-weight: 600;
 	font-size: 13px;
-	color: #007acc;
-}
-
-@media (prefers-color-scheme: dark) {
-	.message-user {
-		color: #4dabf7;
-	}
+	/* Color will be set dynamically via inline style */
 }
 
 .message-time {

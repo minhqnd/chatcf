@@ -26,6 +26,43 @@ function App() {
 		scrollToBottom();
 	}, [messages]);
 
+	// Generate consistent color for username
+	const getUserColor = (username: string) => {
+		// Predefined color palette with good contrast for both light and dark modes
+		const colorPalette = [
+			'#e74c3c', // Red
+			'#3498db', // Blue
+			'#2ecc71', // Green
+			'#f39c12', // Orange
+			'#9b59b6', // Purple
+			'#1abc9c', // Teal
+			'#e67e22', // Carrot
+			'#34495e', // Dark Blue Gray
+			'#16a085', // Dark Teal
+			'#27ae60', // Dark Green
+			'#2980b9', // Dark Blue
+			'#8e44ad', // Dark Purple
+			'#d35400', // Dark Orange
+			'#c0392b', // Dark Red
+			'#7f8c8d', // Gray
+			'#f1c40f', // Yellow (but not too bright)
+			'#e84393', // Pink
+			'#00b894', // Mint
+			'#fd79a8', // Light Pink
+			'#fdcb6e', // Cream
+		];
+		
+		// Simple hash to get consistent index
+		let hash = 0;
+		for (let i = 0; i < username.length; i++) {
+			hash = username.charCodeAt(i) + ((hash << 5) - hash);
+		}
+		
+		// Use absolute value and modulo to get palette index
+		const index = Math.abs(hash) % colorPalette.length;
+		return colorPalette[index];
+	};
+
 	const socket = usePartySocket({
 		party: "chat",
 		room,
@@ -89,7 +126,12 @@ function App() {
 					{messages.map((message) => (
 						<div key={message.id} className="message">
 							<div className="message-header">
-								<span className="message-user">{message.user}</span>
+								<span 
+									className="message-user" 
+									style={{ color: getUserColor(message.user) }}
+								>
+									{message.user}
+								</span>
 								<span className="message-time">
 									{new Date(message.timestamp).toLocaleString()}
 								</span>
