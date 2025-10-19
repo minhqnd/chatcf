@@ -108,6 +108,7 @@ html {
 
 /* Form container - fixed at bottom */
 .message-form-container {
+	padding-bottom: 5px;
 	position: fixed;
 	bottom: 0;
 	left: 0;

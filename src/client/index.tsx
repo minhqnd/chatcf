@@ -1,6 +1,6 @@
 import { createRoot } from "react-dom/client";
 import { usePartySocket } from "partysocket/react";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
 	BrowserRouter,
 	Routes,
@@ -16,6 +16,15 @@ function App() {
 	const [name] = useState(names[Math.floor(Math.random() * names.length)]);
 	const [messages, setMessages] = useState<ChatMessage[]>([]);
 	const { room } = useParams();
+	const messagesEndRef = useRef<HTMLDivElement>(null);
+
+	const scrollToBottom = () => {
+		messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+	};
+
+	useEffect(() => {
+		scrollToBottom();
+	}, [messages]);
 
 	const socket = usePartySocket({
 		party: "chat",
@@ -88,6 +97,7 @@ function App() {
 							<div className="message-content">{message.content}</div>
 						</div>
 					))}
+					<div ref={messagesEndRef} />
 				</div>
 			</div>
 
