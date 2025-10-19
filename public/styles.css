@@ -226,10 +226,11 @@ html {
 	
 	.scroll-to-bottom-btn {
 		bottom: 110px; /* Adjust for mobile form height */
-		right: 16px;
-		width: 40px;
+		min-width: 100px;
 		height: 40px;
-		border-radius: 50%; /* Ensure it stays circular on mobile */
+		border-radius: 20px;
+		font-size: 13px;
+		padding: 0 12px;
 	}
 }
 
@@ -257,10 +258,12 @@ html {
 .scroll-to-bottom-btn {
 	position: fixed;
 	bottom: 120px; /* Above the message form */
-	right: 20px;
-	width: 44px;
+	left: 50%;
+	transform: translateX(-50%); /* Center horizontally */
+	width: auto;
+	min-width: 120px;
 	height: 44px;
-	border-radius: 50%;
+	border-radius: 12px; /* Pill shape instead of circle */
 	background: rgba(255, 255, 255, 0.9);
 	backdrop-filter: blur(10px);
 	border: 2px solid rgba(0, 0, 0, 0.1);
@@ -272,11 +275,10 @@ html {
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 	transition: all 0.2s ease;
 	z-index: 50;
-	font-size: 18px;
-	font-weight: bold;
-	box-sizing: border-box; /* Ensure consistent sizing */
-	min-width: 44px; /* Prevent shrinking */
-	min-height: 44px; /* Prevent shrinking */
+	font-size: 14px;
+	font-weight: 500;
+	box-sizing: border-box;
+	padding: 0 16px;
 }
 
 @media (prefers-color-scheme: dark) {

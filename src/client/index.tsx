@@ -178,9 +178,9 @@ function App() {
 				<button 
 					className="scroll-to-bottom-btn"
 					onClick={scrollToBottom}
-					aria-label="Scroll to bottom"
+					aria-label="Scroll to new messages"
 				>
-					⇓
+					New message
 				</button>
 			)}
 
