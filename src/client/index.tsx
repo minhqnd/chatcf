@@ -33,6 +33,7 @@ function App() {
 							content: message.content,
 							user: message.user,
 							role: message.role,
+							timestamp: message.timestamp,
 						},
 					]);
 				} else {
@@ -47,6 +48,7 @@ function App() {
 								content: message.content,
 								user: message.user,
 								role: message.role,
+								timestamp: message.timestamp,
 							})
 							.concat(messages.slice(foundIndex + 1));
 					});
@@ -60,6 +62,7 @@ function App() {
 									content: message.content,
 									user: message.user,
 									role: message.role,
+									timestamp: message.timestamp,
 								}
 							: m,
 					),
@@ -75,7 +78,10 @@ function App() {
 			{messages.map((message) => (
 				<div key={message.id} className="row message">
 					<div className="two columns user">{message.user}</div>
-					<div className="ten columns">{message.content}</div>
+					<div className="eight columns">{message.content}</div>
+					<div className="two columns timestamp">
+						{new Date(message.timestamp).toLocaleString()}
+					</div>
 				</div>
 			))}
 			<form
@@ -90,6 +96,7 @@ function App() {
 						content: content.value,
 						user: name,
 						role: "user",
+						timestamp: Date.now(),
 					};
 					setMessages((messages) => [...messages, chatMessage]);
 					// we could broadcast the message here
@@ -107,7 +114,7 @@ function App() {
 				<input
 					type="text"
 					name="content"
-					className="ten columns my-input-text"
+					className="eight columns my-input-text"
 					placeholder={`Hello ${name}! Type a message...`}
 					autoComplete="off"
 				/>

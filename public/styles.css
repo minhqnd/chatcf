@@ -42,10 +42,24 @@ html {
 	border: "none";
 }
 
-.send-message {
-	padding: 0;
+.message .timestamp {
+	font-size: 0.8em;
+	color: #666;
+	text-align: right;
 }
 
 .my-input-text::placeholder {
 	color: #ccc;
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+	.one-third.column {
+		display: none;
+	}
+	
+	.two-thirds.column {
+		width: 100% !important;
+		margin-left: 0 !important;
+	}
 }
